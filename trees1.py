@@ -209,7 +209,8 @@ class LinkedBinaryTree(BinaryTree):
                     node = node_rep
                     node._parent=node
                     return old_val
-
+##############################################################################
+#traversals
     def visit(self,p):
         a=self._validate(p)
         return p
@@ -226,6 +227,7 @@ class LinkedBinaryTree(BinaryTree):
         if(node._right is not None):
             right_pos = self._make_position(node._right)
             yield preorder_traversal(right_pos)
+    
     def postorder_traversal(self,p):
         node=self._validate(p)
         
@@ -251,13 +253,62 @@ class LinkedBinaryTree(BinaryTree):
         if(node._right is not None):
             right_pos = self._make_position(node._right)
             preorder_traversal(right_pos)
-    def positions(self):
-        yield self.preorder_iter_self()
+    
+    def positions(self,a):
+        if(a=="preorder"):
+            yield self.preorder_iterator_init()
+        if(a=="postorder"):
+            yield self.postorder_iterator_init()
+        if(a=="inorder"):
+            yield self.inorder_iterator_init()
+        else:
+            return ValueError("Wrong mode selected")
     def __iter__(self):
-        #get iteration of all elements of the tree
-        for p in self.positions():
+        #get iteration of all elements of the tree in preorder
+        for p in self.positions("preorder"):
             yield p._element
-    def preorder_iter_self(self):
+    def iter(self,a):
+        if(a=="preorder"):
+            for p in self.positions("preorder"):
+                yield p._element
+        if(a=="postorder"):
+             for p in self.positions("postorder"):
+                yield p._element
+        if(a=="inorder"):
+             for p in self.positions("inorder"):
+                yield p._element
+    ############################################################
+    #init traversal functions
+    ############################################################
+    
+    def preorder_iterator_init(self):
         if(self._root is not None):
             for a in self.preorder_traversal(self._root):
                 yield a
+        else:
+            return TypeError("Empty tree")
+    def postorder_iterator_init(self):
+        if(self._root is not None):
+            for a in self.postorder_traversal(self._root):
+                yield a 
+        else:
+            return TypeError("Empty tree")
+    def inorder_iterator_init(self):
+        if(self._root is not None):
+            for a in self.inorder_traversal(self._root):
+                yield a
+        else:
+            return TypeError("Empty tree")
+    def list_return(self,a):
+        ans_list=[]
+        if(a=="preorder"):
+            for i in iter("preorder"):
+                ans_list.append(i)
+        if(a == "postorder"):
+            for i in iter("postorder"):
+                ans_list.append(i)
+        if(a=="inorder"):
+            for i in iter("inorder"):
+                ans_list.append(i)
+        return ans_list
+#I didn't code for other things they were already more of it but we can add minor stuff later.
