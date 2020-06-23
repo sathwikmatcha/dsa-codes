@@ -255,7 +255,6 @@ class LinkedBinaryTree(BinaryTree):
         yield self.preorder_iter_self()
     def __iter__(self):
         #get iteration of all elements of the tree
-        p.self._root
         for p in self.positions():
             yield p._element
     def preorder_iter_self(self):
