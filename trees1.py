@@ -209,3 +209,33 @@ class LinkedBinaryTree(BinaryTree):
                     node = node_rep
                     node._parent=node
                     return old_val
+
+    def visit(self,p):
+        a=self._validate(p)
+        yield p
+
+    def preorder_traversal(self,p):
+        
+        self.visit(p)
+        node=self._validate(p)
+        
+        if(node._left is not None):
+            left_pos=self._make_position(node._left)
+            preorder_traversal(left_pos)
+        
+        if(node._right is not None):
+            right_pos = self._make_position(node._right)
+            preorder_traversal(right_pos)
+    def postorder_traversal(self,p):
+        node=self._validate(p)
+        
+        if(node._left is not None):
+            left_pos = self._make_position(node._left)
+            preorder_traversal(left_pos)
+
+        if(node._right is not None):
+            right_pos = self._make_position(node._right)
+            preorder_traversal(right_pos)
+        
+        self.visit(p)
+
