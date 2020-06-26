@@ -22,12 +22,13 @@ class PriorityQueue(prQ_Base):
         print("small= ", small)
         walk = self._data.after(small)
         print("walk= ", walk)
+        i = 0
         while walk is not None:
             if(walk.element() < small.element()):
                 small = walk
             walk = self._data.after(walk)
-            if(walk == None):
-                break
+            print(i)
+            i += 1
         return small
 
     def __init__(self):
@@ -37,10 +38,11 @@ class PriorityQueue(prQ_Base):
         return len(self._data)
 
     def add(self, k, v):
-        self._data.add_last(self._Item(k, v))
+        self._data.add_first(self._Item(k, v))
 
     def min(self):
         a = self.find_min()
+        print(a)
         ans = a.element()
         return(ans._k, ans._v)
 
